@@ -1,4 +1,12 @@
+*.pyc
+*.pyo
+.installed.cfs
+bin
+develop-eggs
+dist
+downloads
 eggs
 parts
-develop-eggs
-bin
+src/*.egg-info
+
+
