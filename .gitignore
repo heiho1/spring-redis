@@ -1,6 +1,8 @@
 *.pyc
 *.pyo
-.installed.cfs
+*~
+.installed.cfg
+pip-log.txt
 bin
 develop-eggs
 dist
