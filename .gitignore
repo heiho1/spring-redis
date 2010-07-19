@@ -1,6 +1,8 @@
+*.py~
 *.pyc
 *.pyo
 *~
+*.log
 .installed.cfg
 pip-log.txt
 bin
