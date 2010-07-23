@@ -13,3 +13,4 @@ class PerformanceInterceptor(MethodInterceptor):
         stop = time.time()
         logging.debug("Invocation:%s: took %2f seconds" % (invocation, \
                       stop - start))
+        return results
