@@ -1,8 +1,9 @@
+import threading
+import time
 from django.test import TestCase
-
 from springpython.context import ApplicationContext
-
 from spring_redis.appconfig import RedisAppConfig
+
 
 class SpringRedisTest(TestCase):
     def test_environment(self):
@@ -21,3 +22,4 @@ class SpringRedisTest(TestCase):
         self.assertEquals(rdssvc.get(tstky), tstval)
         self.assertTrue(rdssvc.delete(tstky))
         self.assertFalse(rdssvc.exists(tstky))
+
