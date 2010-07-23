@@ -3,7 +3,10 @@ import time
 from django.test import TestCase
 from springpython.context import ApplicationContext
 from spring_redis.appconfig import RedisAppConfig
-
+from spring_redis.test_connection_pool import ConnectionPoolTestCase
+from spring_redis.test_lock import LockTestCase
+from spring_redis.test_pipeline import PipelineTestCase
+from spring_redis.test_server_commands import ServerCommandsTestCase
 
 class SpringRedisTest(TestCase):
     def test_environment(self):

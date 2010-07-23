@@ -1,5 +1,5 @@
 import redis
-from django import TestCase
+from django.test import TestCase
 from springpython.context import ApplicationContext
 from spring_redis.appconfig import RedisAppConfig
 
