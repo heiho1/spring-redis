@@ -1,10 +1,13 @@
 import redis
 from django import TestCase
+from springpython.context import ApplicationContext
+from spring_redis.appconfig import RedisAppConfig
 
 
 class PipelineTestCase(TestCase):
     def setUp(self):
-        self.client = redis.Redis(host='localhost', port=6379, db=9)
+        appctx = ApplicationContext(RedisAppConfig())
+        self.client = appctx.get_object('redis_service')
         self.client.flushdb()
 
     def tearDown(self):

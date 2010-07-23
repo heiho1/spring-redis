@@ -2,17 +2,20 @@ import redis
 import threading
 import time
 from django.test import TestCase
-
+from springpython.context import ApplicationContext
+from spring_redis.appconfig import RedisAppConfig
 
 class ConnectionPoolTestCase(TestCase):
     def test_multiple_connections(self):
         # 2 clients to the same host/port/db/pool should use the same
         # connection
+        appctx = ApplicationContext(RedisAppConfig())
         pool = redis.ConnectionPool()
-        r1 = redis.Redis(host='localhost', port=6379, db=9,
-                         connection_pool=pool)
-        r2 = redis.Redis(host='localhost', port=6379, db=9,
-                         connection_pool=pool)
+        # NOTE: it is fragile to reference connection_pool property directly
+        r1 = appctx.get_object('redis_service')
+        r1.connection_pool=pool
+        r2 = appctx.get_object('redis_service')
+        r2.connection_pool=pool
         self.assertEquals(r1.connection, r2.connection)
 
         # if one of them switches, they should have
@@ -33,7 +36,8 @@ class ConnectionPoolTestCase(TestCase):
         self.assertEquals(conns, mgr_conns)
 
     def test_threaded_workers(self):
-        r = redis.Redis(host='localhost', port=6379, db=9)
+        appctx = ApplicationContext(RedisAppConfig())
+        r = appctx.get_object('redis_service')
         r.set('a', 'foo')
         r.set('b', 'bar')
 

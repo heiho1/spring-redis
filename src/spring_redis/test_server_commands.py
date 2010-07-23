@@ -4,11 +4,15 @@ import threading
 import time
 from distutils.version import StrictVersion
 from django.test import TestCase
+from springpython.context import ApplicationContext
+from spring_redis.appconfig import RedisAppConfig
+
 
 class ServerCommandsTestCase(TestCase):
 
     def get_client(self):
-        return redis.Redis(host='localhost', port=6379, db=9)
+        appctx = ApplicationContext(RedisAppConfig())
+        return appctx.get_object('redis_service')
 
     def setUp(self):
         self.client = self.get_client()
